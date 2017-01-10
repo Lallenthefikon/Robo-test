@@ -1,0 +1,6 @@
+[0109/161032:ERROR:file_io_win.cc(163)] CreateFile C:\Program Files (x86)\Gunbean\Reports\Dump\settings.dat: Åtkomst nekad. (0x5)
+[0109/161032:ERROR:registration_protocol_win.cc(82)] TransactNamedPipe: Denna pipe har avslutats. (0x6D)
+[0109/161032:ERROR:file_io_win.cc(163)] CreateFile C:\Program Files (x86)\Gunbean\Reports\Dump\settings.dat: Åtkomst nekad. (0x5)
+[0109/161127:ERROR:file_io_win.cc(163)] CreateFile C:\Program Files (x86)\Gunbean\Reports\Dump\settings.dat: Åtkomst nekad. (0x5)
+[0109/161127:ERROR:registration_protocol_win.cc(82)] TransactNamedPipe: Denna pipe har avslutats. (0x6D)
+[0109/161127:ERROR:file_io_win.cc(163)] CreateFile C:\Program Files (x86)\Gunbean\Reports\Dump\settings.dat: Åtkomst nekad. (0x5)
