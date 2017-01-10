@@ -11,6 +11,7 @@ public:
 	float cameraSpeed = 7;
 
 	sf::Vector2i mousePos;
+	sf::Vector2i yolo;
 	sf::Vector2f worldMousePos;
 	sf::Mouse::Button mousebutton;
 	bool mouseButtonPressed = false;
