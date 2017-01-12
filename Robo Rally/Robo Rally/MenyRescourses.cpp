@@ -34,13 +34,13 @@ void MenyRescourses::loadTextures(){
 	mTextures.back()->loadFromImage(mMenyspritesheetIMG, sf::IntRect(300, 0, 650, 980));
 	
 	mTextures.push_back(new sf::Texture);
-	mTextures.back()->loadFromImage(mMenyspritesheetIMG, sf::IntRect(0, 0, 300, 300));
+	mTextures.back()->loadFromImage(mMenyspritesheetIMG, sf::IntRect(0, 0, 185, 85));
 
 	mTextures.push_back(new sf::Texture);
-	mTextures.back()->loadFromImage(mMenyspritesheetIMG, sf::IntRect(0, 300, 300, 300));
+	mTextures.back()->loadFromImage(mMenyspritesheetIMG, sf::IntRect(0, 85, 285, 65));
 
 	mTextures.push_back(new sf::Texture);
-	mTextures.back()->loadFromImage(mMenyspritesheetIMG, sf::IntRect(0, 600, 300, 300));
+	mTextures.back()->loadFromImage(mMenyspritesheetIMG, sf::IntRect(0, 150, 255, 73));
 }
 
 void MenyRescourses::clearmTextures(){

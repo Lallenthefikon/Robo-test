@@ -58,13 +58,13 @@ void MainScreen_0::loadSprites(MenyRescourses* rescourses){
 	mBackgroundHud.setPosition(mPosOnSceen);
 
 	mButtons.push_back(new sf::Sprite(rescourses->getTextureScreen_0(1)));
-	mButtons.back()->setPosition(mBackgroundHud.getPosition().x + 150, mBackgroundHud.getPosition().y + 100);
+	mButtons.back()->setPosition(mBackgroundHud.getPosition().x + 150, mBackgroundHud.getPosition().y + 50);
 
 	mButtons.push_back(new sf::Sprite(rescourses->getTextureScreen_0(2)));
-	mButtons.back()->setPosition(mBackgroundHud.getPosition().x + 150, mBackgroundHud.getPosition().y + 500);
+	mButtons.back()->setPosition(mBackgroundHud.getPosition().x + 150, mBackgroundHud.getPosition().y + 250);
 
 	mButtons.push_back(new sf::Sprite(rescourses->getTextureScreen_0(3)));
-	mButtons.back()->setPosition(mBackgroundHud.getPosition().x + 150, mBackgroundHud.getPosition().y + 900);
+	mButtons.back()->setPosition(mBackgroundHud.getPosition().x + 150, mBackgroundHud.getPosition().y + 450);
 }
 
 void MainScreen_0::moveAllSprites(sf::Vector2f vector){
