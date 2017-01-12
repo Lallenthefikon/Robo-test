@@ -1,108 +1,100 @@
 #include "MainMeny.h"
 
+
+
 MainMeny::MainMeny() :
 mMenyRescourses(),
-mSprites(),
-mCurrentSprites(),
-mBackground(mMenyRescourses.getBackgroundTexture())
+mBackground(mMenyRescourses.getBackgroundTexture()),
+mCamera(),
+mMouseButtonPressedLeft(false)
 {
-	loadSprites();
-	loadScreen_0();
 }
 
 
 MainMeny::~MainMeny(){
-	clearmSprites();
+	clearmHuds();
 }
 
-//MainMeny* MainMeny::getInstance(){
-//	static MainMeny mainmeny;
-//	return &mainmeny;
-//}
-
-void MainMeny::update(bool mouseKeyEvent, bool keyboardEvent, bool mouseMoveEvent, AbstractGame* roborally){
-	if (mouseKeyEvent)
-		checkMouse(roborally);
+void MainMeny::update(){
 		
 }
 
 void MainMeny::render(sf::RenderWindow& window){
-	window.draw(mBackground);
-	for (int i = 0; i < mCurrentSprites.size(); i++){
-		window.draw(*mCurrentSprites[i]);
-	}
+	renderWorld(window);
+	renderHud(window);
 }
 
+void MainMeny::initialize(sf::RenderWindow& window){
+	mCamera.setWindow(&window);
+	loadHuds();
+	
+}
+
+void MainMeny::inputEvent(sf::Event& input, AbstractGame* roborally){
+	sf::Vector2i mousePos(input.mouseButton.x, input.mouseButton.y);
+	switch (input.type){
+	case sf::Event::MouseMoved:
+		mCurrentHud->updateTarget(mousePos);
+		break;
+
+	case sf::Event::MouseButtonPressed:
+		mMouseButtonPressedLeft = true;
+		break;
+
+	case sf::Event::MouseButtonReleased:
+		if (mCurrentHud->updateTarget(mousePos))
+			mainMenyEvent(mCurrentHud->getClicked(mousePos), roborally);
+		break;
+	default:
+		break;
+	}
+}
 
 // Privates
 
-
-
-void MainMeny::checkMouse(AbstractGame* roborally){
-	if (variablesAndConstants::getInstance()->mouseButtonClicked){
-		
-		switch (checkWhatIsClicked()){
-		case 1:
-			roborally->exitGame();
-			break;
-		case 2:
-			mMapFilename = "Resources/Maps/Prebuilt maps/Test Map_0.txt";
-			roborally->changeGamestate(AbstractGame::BATTLEFIELD, mMapFilename);
-			break;
-		case 3:
-			mMapFilename = "Resources/Maps/Prebuilt maps/Test Map_0.txt";
-			roborally->changeGamestate(AbstractGame::MAPEDITOR, mMapFilename);
-			break;
-		default:
-			break;
-		}
-		variablesAndConstants::getInstance()->mouseButtonClicked = false;
-	}
-
+void MainMeny::renderWorld(sf::RenderWindow& window){
+	window.draw(mBackground);
 }
 
-void MainMeny::loadSprites(){
-	mSprites.push_back(new sf::Sprite(mMenyRescourses.getTexture(0)));
-	mSprites.back()->setPosition(200, 200);
-
-	mSprites.push_back(new sf::Sprite(mMenyRescourses.getTexture(1)));
-	mSprites.back()->setPosition(800, 200);
-
-	mSprites.push_back(new sf::Sprite(mMenyRescourses.getTexture(2)));
-	mSprites.back()->setPosition(500, 500);
+void MainMeny::renderHud(sf::RenderWindow& window){
+	mCurrentHud->render(window);
 }
 
-void MainMeny::loadScreen_0(){
-	mCurrentSprites.clear();
-	mCurrentSprites.push_back(mSprites[0]);
-	mCurrentSprites.push_back(mSprites[1]);
-	mCurrentSprites.push_back(mSprites[2]);
+void MainMeny::loadHuds(){
+	mHuds.push_back(HudFactory::createMainScreen_0(&mMenyRescourses));
+	mCurrentHud = mHuds[0];
 }
 
-int MainMeny::checkWhatIsClicked(){
-	int v = 0;
-	for (int i = 0; i < mCurrentSprites.size(); i++){
-		if (GraphicFunctions::getInstance()->isSpriteClicked(&mCurrentSprites[i]->getTextureRect(),
-			mCurrentSprites[i]->getPosition(), variablesAndConstants::getInstance()->mousePos))
-			v = i + 1;
-	}
-	return v;
+
+void MainMeny::moveHud(){
 }
 
-void MainMeny::mainMenyEvent(int i){
+void MainMeny::mainMenyEvent(int i, AbstractGame* roborally){
 	switch (i){
 	case 0:
+		roborally->exitGame();
 		break;
 
+	case 1:
+		mMapFilename = "Resources/Maps/Prebuilt maps/Test Map_0.txt";
+		roborally->changeGamestate(AbstractGame::BATTLEFIELD, mMapFilename);
+		break;
+
+	case 2:
+		mMapFilename = "Resources/Maps/Prebuilt maps/Test Map_0.txt";
+		roborally->changeGamestate(AbstractGame::MAPEDITOR, mMapFilename);
+		break;
 
 	default:
 		break;
 	}
 }
 
-void MainMeny::clearmSprites(){
-	while (!mSprites.empty()){
-		delete mSprites.back();
-		mSprites.pop_back();
+
+void MainMeny::clearmHuds(){
+	while (!mHuds.empty()){
+		delete mHuds.back();
+		mHuds.pop_back();
 	}
 }
+

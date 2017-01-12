@@ -10,9 +10,10 @@ MenyRescourses::MenyRescourses()
 
 MenyRescourses::~MenyRescourses()
 {
+	clearmTextures();
 }
 
-sf::Texture& MenyRescourses::getTexture(int i){
+sf::Texture& MenyRescourses::getTextureScreen_0(int i){
 	return *mTextures[i];
 }
 
@@ -30,11 +31,21 @@ void MenyRescourses::loadTextures(){
 
 	// Spritesheet
 	mTextures.push_back(new sf::Texture);
-	mTextures.back()->loadFromImage(mMenyspritesheetIMG, sf::IntRect(0, 0, 300, 300));
+	mTextures.back()->loadFromImage(mMenyspritesheetIMG, sf::IntRect(300, 0, 650, 980));
 	
 	mTextures.push_back(new sf::Texture);
-	mTextures.back()->loadFromImage(mMenyspritesheetIMG, sf::IntRect(300, 0, 300, 300));
+	mTextures.back()->loadFromImage(mMenyspritesheetIMG, sf::IntRect(0, 0, 300, 300));
 
 	mTextures.push_back(new sf::Texture);
 	mTextures.back()->loadFromImage(mMenyspritesheetIMG, sf::IntRect(0, 300, 300, 300));
+
+	mTextures.push_back(new sf::Texture);
+	mTextures.back()->loadFromImage(mMenyspritesheetIMG, sf::IntRect(0, 600, 300, 300));
+}
+
+void MenyRescourses::clearmTextures(){
+	while (!mTextures.empty()){
+		delete mTextures.back();
+		mTextures.pop_back();
+	}
 }

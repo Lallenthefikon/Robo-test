@@ -10,5 +10,10 @@ public:
 
 	virtual void update();
 	virtual void render(sf::RenderWindow& window);
+
+	virtual void dragSprite(sf::Vector2i pos);
+	virtual void returnSprite();
+
+	virtual void setPos(sf::Vector2i newPos);
 };
 

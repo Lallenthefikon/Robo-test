@@ -6,29 +6,37 @@
 class Camera
 {
 public:
+	Camera();
 	~Camera();
-	static Camera* getInstance();
 
-	void update(bool mouseKeyEvent, bool keyboardEvent, bool mouseMoveEvent);
+	void update();
 	void setWindow(sf::RenderWindow* window);
 
-private:
-	Camera();
+	sf::Vector2f getViewPos()const;
+	sf::Vector2f getViewSize()const;
+	bool getViewNeedUpdate()const{ return mViewNeedUpdate; }
 
-	void mouseViewMove();
-	bool mouseInBounds();
+	void checkMouseViewMove(sf::Vector2i mousePos);
+
+
+private:
+
+	bool mouseInBounds(sf::Vector2i mousePos);
+
+	void OOB_Check(sf::Vector2i mousePos);
 
 	void updateWindow();
 
 	sf::RenderWindow* mWindow;
 	sf::View mCurrentView;
 
+	float mCameraSpeed;
 	float mZoom;
 
 	bool mMouseLeftOfWindow;
 	bool mMouseRightOfWindow;
 	bool mMouseTopOfWindow;
 	bool mMouseBottomOfWindow;
-	bool mWindowNeedUpdate;
+	bool mViewNeedUpdate;
 };
 

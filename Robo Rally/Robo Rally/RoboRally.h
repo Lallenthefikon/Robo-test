@@ -23,12 +23,10 @@ private:
 
 	void changeGameStateEXE();
 
+	void checkEvents(sf::RenderWindow& window);
+
 	AbstractGame::Gamestate mGamestate;
 	GameState* mCurrentGamestate;
-
-	bool mMouseKeyEvent;
-	bool mMouseMoveEvent;
-	bool mKeyboardEvent;
 	
 	bool mExitGame;
 	bool mGamestateChanged;

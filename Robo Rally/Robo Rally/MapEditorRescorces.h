@@ -9,8 +9,9 @@ public:
 	MapEditorRescorces();
 	~MapEditorRescorces();
 
-	sf::Texture& getTexture(int i);
+	sf::Texture& getEntitySelectorTexture(int i);
 	sf::Texture& getBackgroundTexture(){ return mBackgroundTexture; }
+	sf::Texture& getGridTexture(sf::IntRect& rect);
 
 
 private:
@@ -18,10 +19,14 @@ private:
 	void loadImages();
 	void loadTextures();
 
+	void clearTextures();
+
 	sf::Image mBackgroundIMG;
 	sf::Image mSpritesheetIMG;
+	sf::Image mGridIMG;
 
 	std::vector<sf::Texture*> mTextures;
 	sf::Texture mBackgroundTexture;
+	std::vector<sf::Texture*> mGridTextures;
 };
 

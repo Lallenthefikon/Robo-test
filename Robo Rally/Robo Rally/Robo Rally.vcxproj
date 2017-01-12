@@ -82,8 +82,10 @@
     <ClCompile Include="GenericFunctions.cpp" />
     <ClCompile Include="GraphicFunctions.cpp" />
     <ClCompile Include="Hud.cpp" />
+    <ClCompile Include="HudFactory.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMeny.cpp" />
+    <ClCompile Include="MainScreen_0.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapEditor.cpp" />
     <ClCompile Include="MapEditorRescorces.cpp" />
@@ -93,6 +95,7 @@
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="Twitch_Robot.cpp" />
     <ClCompile Include="variablesAndConstants.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractGame.h" />
@@ -107,7 +110,9 @@
     <ClInclude Include="GenericFunctions.h" />
     <ClInclude Include="GraphicFunctions.h" />
     <ClInclude Include="Hud.h" />
+    <ClInclude Include="HudFactory.h" />
     <ClInclude Include="MainMeny.h" />
+    <ClInclude Include="MainScreen_0.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapEditor.h" />
     <ClInclude Include="MapEditorRescorces.h" />
@@ -117,6 +122,7 @@
     <ClInclude Include="Robot.h" />
     <ClInclude Include="Twitch_Robot.h" />
     <ClInclude Include="variablesAndConstants.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

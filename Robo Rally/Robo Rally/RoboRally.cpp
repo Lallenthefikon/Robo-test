@@ -5,9 +5,6 @@
 RoboRally::RoboRally() :
 mGamestate(AbstractGame::Gamestate::MAINMENY),
 mCurrentGamestate(GamestateFactory::createMainMeny()),
-mMouseKeyEvent(false),
-mMouseMoveEvent(false),
-mKeyboardEvent(false),
 mExitGame(false),
 mGamestateChanged(false)
 {
@@ -21,86 +18,21 @@ RoboRally::~RoboRally()
 void RoboRally::runGame(){
 	sf::RenderWindow window(sf::VideoMode(1900, 1000), "Robbo Rally");
 	window.setFramerateLimit(60);
-	Camera::getInstance()->setWindow(&window);
+	mCurrentGamestate->initialize(window);
 
-	while (window.isOpen())
-	{
+	while (window.isOpen()){
 
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			switch (event.type)
-			{
-	
-			
-			case sf::Event::Closed:
-				window.close();
-				break;
-
-
-
-			case sf::Event::MouseMoved:
-				mMouseMoveEvent = true;
-				if (variablesAndConstants::getInstance()->mouseButtonPressed)
-					variablesAndConstants::getInstance()->mouseDragging = true;
-				variablesAndConstants::getInstance()->mouseButtonPressed = false;
-				variablesAndConstants::getInstance()->mousePos = sf::Mouse::getPosition(window);
-				variablesAndConstants::getInstance()->worldMousePos = window.mapPixelToCoords(variablesAndConstants::getInstance()->mousePos);
-				break;
-
-
-
-			case sf::Event::MouseButtonPressed:
-				mMouseKeyEvent = true;
-				variablesAndConstants::getInstance()->mouseButtonCount += 1;
-				if ((!variablesAndConstants::getInstance()->mouseButtonPressed) && (!variablesAndConstants::getInstance()->mouseDragging)){
-					variablesAndConstants::getInstance()->mouseButtonPressed = true;
-					if (sf::Mouse::isButtonPressed(sf::Mouse::Middle))
-						variablesAndConstants::getInstance()->mousebutton = sf::Mouse::Middle;
-					if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
-						variablesAndConstants::getInstance()->mousebutton = sf::Mouse::Right;
-					if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-						variablesAndConstants::getInstance()->mousebutton = sf::Mouse::Left;
-				}
-				break;
-
-
-
-			case sf::Event::MouseButtonReleased:
-				mMouseKeyEvent = true;
-				variablesAndConstants::getInstance()->mouseButtonCount -= 1;
-				if (variablesAndConstants::getInstance()->mouseButtonCount == 0){
-					if (variablesAndConstants::getInstance()->mouseButtonPressed){
-						variablesAndConstants::getInstance()->mouseButtonClicked = true;
-						variablesAndConstants::getInstance()->mouseButtonPressed = false;
-					}
-					if (variablesAndConstants::getInstance()->mouseDragging){
-						variablesAndConstants::getInstance()->mouseDragged = true;
-						variablesAndConstants::getInstance()->mouseDragging = false;
-					}
-				}
-				break;
-
-
-
-			default:
-				break;
-			}
-		}
+		checkEvents(window);
 
 		window.clear();
-
-		mCurrentGamestate->update(mMouseKeyEvent, mKeyboardEvent, mMouseMoveEvent, this);
+		mCurrentGamestate->update();
 		mCurrentGamestate->render(window);
-		Camera::getInstance()->update(mMouseKeyEvent, mKeyboardEvent, mMouseMoveEvent);
-
 		window.display();
-		mMouseKeyEvent = false;
-		mMouseMoveEvent = false;
-		mKeyboardEvent = false;
 
-		if (mGamestateChanged)
+		if (mGamestateChanged){
 			changeGameStateEXE();
+			mCurrentGamestate->initialize(window);
+		}
 		if (mExitGame)
 			window.close();
 	}
@@ -138,4 +70,28 @@ void RoboRally::changeGameStateEXE(){
 		break;
 	}
 	mGamestateChanged = false;
+}
+
+void RoboRally::checkEvents(sf::RenderWindow& window){
+	sf::Event event;
+	while (window.pollEvent(event))
+	{
+		switch (event.type)
+		{
+
+
+		case sf::Event::Closed:
+			window.close();
+			break;
+
+		case sf::Event::MouseMoved:
+		case sf::Event::MouseButtonPressed:
+		case sf::Event::MouseButtonReleased:
+		case sf::Event::MouseWheelMoved:
+			mCurrentGamestate->inputEvent(event, this);
+			break;
+		default:
+			break;
+		}
+	}
 }

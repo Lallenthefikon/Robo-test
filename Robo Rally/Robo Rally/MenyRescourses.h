@@ -9,12 +9,14 @@ public:
 	MenyRescourses();
 	~MenyRescourses();
 
-	sf::Texture& getTexture(int i);
+	sf::Texture& getTextureScreen_0(int i);
 	sf::Texture& getBackgroundTexture(){ return mBackgroundTexture; }
 private:
 	
 	void loadImages();
 	void loadTextures();
+
+	void clearmTextures();
 
 	sf::Image mMenyspritesheetIMG;
 	sf::Image mBackgroundIMG;

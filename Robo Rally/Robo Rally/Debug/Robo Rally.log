@@ -1,19 +1,15 @@
-﻿Build started 1/8/2017 1:39:25 AM.
-     1>Project "C:\Users\Lallen\Documents\Visual Studio 2013\Projects\Robo Rally\Robo Rally\Robo Rally.vcxproj" on node 2 (Build target(s)).
+﻿Build started 1/12/2017 9:14:45 PM.
+     1>Project "C:\Users\Lallen\Documents\Roborally\Robo Rally\Robo Rally\Robo Rally.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Lallen\Desktop\Lib's\SFML-2.4.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp GamestateFactory.cpp MainMeny.cpp RoboRally.cpp main.cpp variablesAndConstants.cpp
-         Camera.cpp
-         Generating Code...
-         Compiling...
-         variablesAndConstants.cpp
-         RoboRally.cpp
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         main.cpp
-         MainMeny.cpp
-         GamestateFactory.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Lallen\Desktop\Lib's\SFML-2.4.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt MapEditor.cpp
+         MapEditor.cpp
+     1>c:\users\lallen\documents\roborally\robo rally\robo rally\mapeditor.cpp(56): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\lallen\documents\roborally\robo rally\robo rally\mapeditor.cpp(64): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\lallen\documents\roborally\robo rally\robo rally\mapeditor.cpp(112): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\lallen\documents\roborally\robo rally\robo rally\mapeditor.cpp(124): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\lallen\documents\roborally\robo rally\robo rally\mapeditor.cpp(130): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Lallen\Documents\Visual Studio 2013\Projects\Robo Rally\Debug\Robo Rally.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Lallen\Desktop\Lib's\SFML-2.4.1\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" "sfml-network-d.lib" "sfml-audio-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Lallen\Documents\Visual Studio 2013\Projects\Robo Rally\Debug\Robo Rally.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Lallen\Documents\Visual Studio 2013\Projects\Robo Rally\Debug\Robo Rally.lib" /MACHINE:X86 Debug\AbstractGame.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Lallen\Documents\Roborally\Robo Rally\Debug\Robo Rally.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Lallen\Desktop\Lib's\SFML-2.4.1\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" "sfml-network-d.lib" "sfml-audio-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Lallen\Documents\Roborally\Robo Rally\Debug\Robo Rally.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Lallen\Documents\Roborally\Robo Rally\Debug\Robo Rally.lib" /MACHINE:X86 Debug\AbstractGame.obj
          Debug\Battlefield.obj
          Debug\Camera.obj
          Debug\Entity.obj
@@ -25,8 +21,10 @@
          Debug\GenericFunctions.obj
          Debug\GraphicFunctions.obj
          Debug\Hud.obj
+         Debug\HudFactory.obj
          Debug\main.obj
          Debug\MainMeny.obj
+         Debug\MainScreen_0.obj
          Debug\Map.obj
          Debug\MapEditor.obj
          Debug\MapEditorRescorces.obj
@@ -36,9 +34,10 @@
          Debug\Robot.obj
          Debug\Twitch_Robot.obj
          Debug\variablesAndConstants.obj
-         Robo Rally.vcxproj -> C:\Users\Lallen\Documents\Visual Studio 2013\Projects\Robo Rally\Debug\Robo Rally.exe
-     1>Done Building Project "C:\Users\Lallen\Documents\Visual Studio 2013\Projects\Robo Rally\Robo Rally\Robo Rally.vcxproj" (Build target(s)).
+         Debug\World.obj
+         Robo Rally.vcxproj -> C:\Users\Lallen\Documents\Roborally\Robo Rally\Debug\Robo Rally.exe
+     1>Done Building Project "C:\Users\Lallen\Documents\Roborally\Robo Rally\Robo Rally\Robo Rally.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.34
+Time Elapsed 00:00:01.82

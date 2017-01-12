@@ -1,23 +1,6 @@
 #include "Camera.h"
 
-static const int MOUSE_OOB_RECT = 15;
-
-
-Camera::~Camera()
-{
-}
-
-Camera* Camera::getInstance(){
-	static Camera camera;
-	return &camera;
-}
-
-void Camera::setWindow(sf::RenderWindow* window){
-	mWindow = window;
-	mCurrentView = window->getView();
-}
-
-// Privates
+static const int MOUSE_OOB_OFFSET = 15;
 
 Camera::Camera() :
 mWindow(),
@@ -26,53 +9,60 @@ mMouseLeftOfWindow(false),
 mMouseRightOfWindow(false),
 mMouseTopOfWindow(false),
 mMouseBottomOfWindow(false),
-mWindowNeedUpdate(false),
+mViewNeedUpdate(false),
+mCameraSpeed(7.f),
 mZoom(1)
 {
 }
 
-void Camera::update(bool mouseKeyEvent, bool keyboardEvent, bool mouseMoveEvent){
-
-	if (mouseMoveEvent){
-		mouseViewMove();
-	}
-	if (mWindowNeedUpdate)
-		updateWindow();
+Camera::~Camera()
+{
 }
 
-// Privates
+void Camera::update(){
+	if (mViewNeedUpdate){
+		updateWindow();
+	}
+}
 
-void Camera::mouseViewMove(){
-	if (mouseInBounds()){
+
+void Camera::setWindow(sf::RenderWindow* window){
+	mWindow = window;
+	mCurrentView = window->getView();
+}
+
+sf::Vector2f Camera::getViewPos()const{
+	sf::Vector2f temp = mCurrentView.getCenter();
+	temp.x -= mCurrentView.getSize().x / 2;
+	temp.y -= mCurrentView.getSize().y / 2;
+	return temp;
+}
+
+sf::Vector2f Camera::getViewSize()const{
+	return mCurrentView.getSize();
+}
+
+void Camera::checkMouseViewMove(sf::Vector2i mousePos){
+	if (mouseInBounds(mousePos)){
 		mMouseLeftOfWindow = false;
 		mMouseRightOfWindow = false;
 		mMouseTopOfWindow = false;
 		mMouseBottomOfWindow = false;
-
-		mWindowNeedUpdate = false;
+		mViewNeedUpdate = false;
 	}
 	else {
-		if (variablesAndConstants::getInstance()->mousePos.x <= MOUSE_OOB_RECT)
-			mMouseLeftOfWindow = true;
-		else if (variablesAndConstants::getInstance()->mousePos.x >= mCurrentView.getSize().x - MOUSE_OOB_RECT)
-			mMouseRightOfWindow = true;
-		if (variablesAndConstants::getInstance()->mousePos.y <= MOUSE_OOB_RECT)
-			mMouseTopOfWindow = true;
-		else if (variablesAndConstants::getInstance()->mousePos.y >= mCurrentView.getSize().y - MOUSE_OOB_RECT)
-			mMouseBottomOfWindow = true;
-
-		mWindowNeedUpdate = true;
+		OOB_Check(mousePos);
+		mViewNeedUpdate = true;
 	}
 }
 
-bool Camera::mouseInBounds(){
+// Privates
 
-	sf::Vector2i mousePos(variablesAndConstants::getInstance()->mousePos);
-
-	if (mousePos.y > MOUSE_OOB_RECT &&
-		mousePos.y < mCurrentView.getSize().y - MOUSE_OOB_RECT &&
-		mousePos.x > MOUSE_OOB_RECT &&
-		mousePos.x < mCurrentView.getSize().x - MOUSE_OOB_RECT){
+bool Camera::mouseInBounds(sf::Vector2i mousePos){
+	if (mousePos.y > MOUSE_OOB_OFFSET &&
+		mousePos.y < mCurrentView.getSize().y - MOUSE_OOB_OFFSET &&
+		mousePos.x > MOUSE_OOB_OFFSET &&
+		mousePos.x < mCurrentView.getSize().x - MOUSE_OOB_OFFSET){
 		return true;
 	}
 	else{
@@ -80,16 +70,27 @@ bool Camera::mouseInBounds(){
 	}
 }
 
+void Camera::OOB_Check(sf::Vector2i mousePos){
+	if (mousePos.x <= MOUSE_OOB_OFFSET)
+		mMouseLeftOfWindow = true;
+	else if (mousePos.x >= mCurrentView.getSize().x - MOUSE_OOB_OFFSET)
+		mMouseRightOfWindow = true;
+	if (mousePos.y <= MOUSE_OOB_OFFSET)
+		mMouseTopOfWindow = true;
+	else if (mousePos.y >= mCurrentView.getSize().y - MOUSE_OOB_OFFSET)
+		mMouseBottomOfWindow = true;
+}
+
 void Camera::updateWindow(){
 	sf::Vector2f temp;
 	if (mMouseLeftOfWindow)
-		temp.x -= variablesAndConstants::getInstance()->cameraSpeed * mZoom;
+		temp.x -= mCameraSpeed * mZoom;
 	else if (mMouseRightOfWindow)
-		temp.x += variablesAndConstants::getInstance()->cameraSpeed * mZoom;
+		temp.x += mCameraSpeed * mZoom;
 	if (mMouseTopOfWindow)
-		temp.y -= variablesAndConstants::getInstance()->cameraSpeed * mZoom;
+		temp.y -= mCameraSpeed * mZoom;
 	else if (mMouseBottomOfWindow)
-		temp.y += variablesAndConstants::getInstance()->cameraSpeed * mZoom;
+		temp.y += mCameraSpeed * mZoom;
 	mCurrentView.move(temp);
 
 	mWindow->setView(mCurrentView);

@@ -102,6 +102,15 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainScreen_0.cpp">
+      <Filter>Source Files\MainMeny</Filter>
+    </ClCompile>
+    <ClCompile Include="HudFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GenericFunctions.h">
@@ -168,6 +177,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainScreen_0.h">
+      <Filter>Header Files\MainMeny</Filter>
+    </ClInclude>
+    <ClInclude Include="HudFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
