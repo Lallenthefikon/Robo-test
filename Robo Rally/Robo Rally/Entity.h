@@ -17,5 +17,7 @@ public:
 	virtual void returnSprite() = 0;
 
 	virtual void setPos(sf::Vector2i newPos) = 0;
+
+	
 };
 

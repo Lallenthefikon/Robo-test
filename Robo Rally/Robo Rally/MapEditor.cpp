@@ -76,7 +76,7 @@ void MapEditor::mouseInput(sf::Event& input, AbstractGame* roborally){
 			mEntityTargeted->dragSprite(mousePos);
 		}
 
-		updateHoverTarget(input.mouseButton.x, input.mouseButton.y);
+		updateHoverTarget(input.mouseMove.x, input.mouseMove.y);
 		break;
 
 	case sf::Event::MouseButtonPressed:
@@ -95,13 +95,19 @@ void MapEditor::mouseInput(sf::Event& input, AbstractGame* roborally){
 			else if (mHudHoverTargeted != 0 && mMouseButtonPressedLeft == true){
 				mHudHoverTargeted->getClicked(mousePos);
 			}
+			else if (mEntityHoverTargeted != 0){
+				mEntityTargeted = mEntityHoverTargeted;
+			}
 		}
 		mMouseButtonPressedLeft = false;
 		break;
 
-	case sf::Event::MouseWheelMoved:
+	case sf::Event::MouseWheelScrolled:
 		if (mHudHoverTargeted != 0)
-			mHudHoverTargeted->wheelMove(mousePos, input.mouseWheel.delta);
+			mHudHoverTargeted->wheelMove(mousePos, input.mouseWheelScroll.delta);
+		else{
+			mCamera.zoom(input.mouseWheelScroll.delta);
+		}
 		break;
 	default:
 		break;
@@ -117,8 +123,10 @@ void MapEditor::moveHud(){
 void MapEditor::updateHoverTarget(int x, int y){
 	sf::Vector2i mousePos(x, y);
 	if (mHudHoverTargeted != 0){
-		if (!mHudHoverTargeted->updateTarget(mousePos))
+		if (!mHudHoverTargeted->updateTarget(mousePos)){
+			mHudHoverTargeted = 0;
 			updateHoverTarget(x, y);
+		}
 	}
 	else{
 		for (int i = 0; i < mHuds.size(); i++){

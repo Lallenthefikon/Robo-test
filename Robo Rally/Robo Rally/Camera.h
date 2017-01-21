@@ -17,7 +17,7 @@ public:
 	bool getViewNeedUpdate()const{ return mViewNeedUpdate; }
 
 	void checkMouseViewMove(sf::Vector2i mousePos);
-
+	void zoom(float delta);
 
 private:
 

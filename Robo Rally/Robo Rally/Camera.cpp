@@ -1,6 +1,9 @@
 #include "Camera.h"
 
 static const int MOUSE_OOB_OFFSET = 15;
+static const int ZOOM_SPEED_divider = 10;
+static const float MAX_ZOOM = 0.5;
+static const float MIN_ZOOM = 2;
 
 Camera::Camera() :
 mWindow(),
@@ -53,6 +56,21 @@ void Camera::checkMouseViewMove(sf::Vector2i mousePos){
 	else {
 		OOB_Check(mousePos);
 		mViewNeedUpdate = true;
+	}
+}
+
+void Camera::zoom(float delta){
+	if (delta < 0 && mZoom > MIN_ZOOM){
+		float temp = (delta / ZOOM_SPEED_divider) +1;
+		mZoom *= temp;
+		mCurrentView.zoom(temp + 1);
+		mWindow->setView(mCurrentView);
+	}
+	else if (mZoom < MAX_ZOOM){
+		float temp = (delta / ZOOM_SPEED_divider) + 1;
+		mZoom *= temp;
+		mCurrentView.zoom(temp );
+		mWindow->setView(mCurrentView);
 	}
 }
 

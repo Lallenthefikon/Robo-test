@@ -21,6 +21,8 @@ public:
 	virtual void initialize(sf::RenderWindow& window);
 	virtual void inputEvent(sf::Event& input, AbstractGame* roborally);
 
+	const float hej = 2.0;
+
 private:
 
 	void loadHuds();
@@ -54,5 +56,6 @@ private:
 
 	bool mMouseButtonPressedLeft;
 	bool mDraggingEntity;
+
 };
 
